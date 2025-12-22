@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceScape - Download</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: right;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        .navbar .logo {
+            float: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        /* 页面容器 */
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        /* 标题样式 */
+        .section-title {
+            color: #800080;
+            font-size: 22px;
+            margin: 20px 0 10px;
+        }
+        /* 流程模块 */
+        .procedure {
+            border: 1px dashed #666;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .procedure-step {
+            text-align: center;
+        }
+        .procedure-btn {
+            background: #ddd;
+            padding: 8px 12px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .arrow {
+            font-size: 20px;
+            color: #666;
+        }
+        /* 表单与说明样式 */
+        .instructions {
+            line-height: 1.6;
+        }
+        .email-template {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #999;
+        }
+        .restrictions {
+            margin: 15px 0;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: inline-block;
+            width: 80px;
+        }
+        .form-group input {
+            padding: 6px;
+            width: 250px;
+        }
+        .drag-verify {
+            margin: 10px 0;
+        }
+        .drag-slider {
+            width: 200px;
+            height: 30px;
+            background: #eee;
+            display: inline-block;
+            position: relative;
+        }
+        .drag-handle {
+            width: 40px;
+            height: 30px;
+            background: #ccc;
+            position: absolute;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+        }
+        .btn-login {
+            background: #990099;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .required {
+            color: red;
+        }
+        /* 许可证协议链接样式 */
+        .license-link {
+            color: #800080;
+            text-decoration: underline;
+        }
+        .license-link:hover {
+            color: #990099;
+            text-decoration: none;
+        }
+        /* 导航栏链接hover优化 */
+        .navbar a:hover {
+            color: #ddd;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏：核心修改 - Data（对应Dataset）链接指向目标页面 -->
+    <div class="navbar">
+        <span class="logo">FACESCAPE</span>
+        <a href="#">Home</a>
+        <!-- 以下是修改后的Dataset（Data）链接，指向指定页面 -->
+        <a href="https://facescape.nju.edu.cn/Page_Data/" target="_blank">Data</a> 
+        <a href="#">Download</a>
+        <a href="#">FAQ</a>
+        <a href="#">GitHub</a>
+    </div>
+
+    <!-- 以下内容完全保留，无任何修改 -->
+    <div class="container">
+        <h2 class="section-title">Procedure</h2>
+        <div class="procedure">
+            <div class="procedure-step">
+                <div>Apply for License Key</div>
+                <div class="procedure-btn">Read & Sign License</div>
+                <div class="arrow">→</div>
+                <div class="procedure-btn">Send Request Email</div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="procedure-step">
+                <div class="procedure-btn">Receive License Key</div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="procedure-step">
+                <div>Download Data</div>
+                <div class="procedure-btn">Login</div>
+                <div class="arrow">→</div>
+                <div class="procedure-btn">Download</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Apply for License Key</h2>
+        <div class="instructions">
+            <p>1. Download and read <strong><a href="https://facescape.nju.edu.cn/static/License_Agreement.pdf" target="_blank" class="license-link">LICENSE AGREEMENT</a></strong> carefully, confirming that all the terms are agreed. Then scan the signed license agreement to pdf. Electronic signature is allowed, which is turning the handwritten signature into a picture to be placed on the agreement.</p>
+            <p>2. Send an e-mail to facescape@outlook.com. We recommend to apply using a *.edu e-mail, which is more likely to be authorized.</p>
+            <p>We will respond to e-mails every Tuesday and Friday. Please refer to the following template for Email content:</p>
+            
+            <div class="email-template">
+                Subject: Application of FaceScape Dataset<br>
+                Content Template:<br>
+                Applicant: ________<br>
+                Occupation: ________<br>
+                Institution: ________<br>
+                Purpose of Usage: ________<br>
+                Attachment: Scanned of license agreement with signature
+            </div>
+
+            <p>Optional: We recommend to attach a brief resume or personal page URL to help us identify you. If we cannot identify you as a professor or researcher, the application may be ignored.</p>
+        </div>
+
+        <h2 class="section-title">Download Data</h2>
+        <div class="instructions">
+            <p>When you submit request, which means you have read, understand, and commit to the entirety of the License Agreement. There are, still, a few <strong>KEY POINTS</strong> which need to emphasize again:</p>
+            
+            <div class="restrictions">
+                <p>☐ NO COMMERCIAL USE: The license granted is for internal, non-commercial research, evaluation or testing purposes only. Any use of the DATA or its contents to manufacture or sell products or technologies (or portions thereof) either directly or indirectly for any direct or indirect for-profit purposes is strictly prohibited.</p>
+                <p>☐ NO DISTRIBUTION: You are not allowed to sublicense or distribute the DATA in whole or in part to any third party.</p>
+                <p>☐ NO WARRANTY: The data are provided "as is" and any express or implied warranties are disclaimed.</p>
+                <p>☐ RESTRICTED USE IN RESEARCH: The portraits including images and rendered model cannot be published in any form, except for the data as listed in the published list.</p>
+                <p>☐ I AGREE ALL OF THESE STATEMENTS.</p>
+            </div>
+
+            <div class="form-group">
+                <label><span class="required">*</span> E-Mail</label>
+                <input type="email" placeholder="Please input your E-Mail">
+            </div>
+            <div class="form-group">
+                <label><span class="required">*</span> License Key</label>
+                <input type="text" placeholder="Please input your License Key">
+            </div>
+
+            <div class="drag-verify">
+                <label>Drag to Verify</label>
+                <div class="drag-slider">
+                    <div class="drag-handle">→</div>
+                </div>
+            </div>
+
+            <button class="btn-login">Login</button>
+        </div>
+    </div>
+</body>
+</html>
