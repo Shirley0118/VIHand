@@ -3,219 +3,634 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FaceScape - Download</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
+    <title>VIHand - Dataset Download</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#3B82F6',
+                        accent: '#F97316',
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                        neutral: '#64748B',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
         }
-        /* 导航栏样式 */
-        .navbar {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            text-align: right;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-        .navbar .logo {
-            float: left;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        /* 页面容器 */
-        .container {
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        /* 标题样式 */
-        .section-title {
-            color: #800080;
-            font-size: 22px;
-            margin: 20px 0 10px;
-        }
-        /* 流程模块 */
-        .procedure {
-            border: 1px dashed #666;
-            padding: 15px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .procedure-step {
-            text-align: center;
-        }
-        .procedure-btn {
-            background: #ddd;
-            padding: 8px 12px;
-            border: 1px solid #999;
-            border-radius: 4px;
-            display: inline-block;
-            margin: 5px 0;
-        }
-        .arrow {
-            font-size: 20px;
-            color: #666;
-        }
-        /* 表单与说明样式 */
-        .instructions {
-            line-height: 1.6;
-        }
-        .email-template {
-            background: #f5f5f5;
-            padding: 10px;
-            margin: 10px 0;
-            border-left: 3px solid #999;
-        }
-        .restrictions {
-            margin: 15px 0;
-        }
-        .form-group {
-            margin: 10px 0;
-        }
-        .form-group label {
-            display: inline-block;
-            width: 80px;
-        }
-        .form-group input {
-            padding: 6px;
-            width: 250px;
-        }
-        .drag-verify {
-            margin: 10px 0;
-        }
-        .drag-slider {
-            width: 200px;
-            height: 30px;
-            background: #eee;
-            display: inline-block;
-            position: relative;
-        }
-        .drag-handle {
-            width: 40px;
-            height: 30px;
-            background: #ccc;
-            position: absolute;
-            cursor: pointer;
-            text-align: center;
-            line-height: 30px;
-        }
-        .btn-login {
-            background: #990099;
-            color: white;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .required {
-            color: red;
-        }
-        /* 许可证协议链接样式 */
-        .license-link {
-            color: #800080;
-            text-decoration: underline;
-        }
-        .license-link:hover {
-            color: #990099;
-            text-decoration: none;
-        }
-        /* 导航栏链接hover优化 */
-        .navbar a:hover {
-            color: #ddd;
-            text-decoration: underline;
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-in-out;
+            }
+            .animate-slide-up {
+                animation: slideUp 0.8s ease-out;
+            }
+            .pill-button {
+                @apply px-6 py-2.5 bg-dark hover:bg-accent text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center text-sm;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateY(20px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            .table-cell-padding {
+                @apply px-4 py-2.5;
+            }
+            .table-row-height {
+                height: 50%;
+            }
+            .form-input-focus {
+                @apply focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300;
+            }
+            .drag-verify-active {
+                @apply bg-primary/10 transition-colors duration-300;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- 导航栏：核心修改 - Data（对应Dataset）链接指向目标页面 -->
-    <div class="navbar">
-        <span class="logo">FACESCAPE</span>
-        <a href="#">Home</a>
-        <!-- 以下是修改后的Dataset（Data）链接，指向指定页面 -->
-        <a href="https://facescape.nju.edu.cn/Page_Data/" target="_blank">Data</a> 
-        <a href="#">Download</a>
-        <a href="#">FAQ</a>
-        <a href="#">GitHub</a>
+<body class="font-inter bg-light text-dark antialiased text-lg">
+
+<nav id="navbar" class="fixed w-full bg-white/90 backdrop-blur-md z-50 transition-all duration-300 shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl"><i class="fa fa-cube text-primary"></i></span>
+            <span class="font-bold text-xl text-primary">VIHand</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+            <a href="index.html#abstract" class="nav-item font-medium hover:text-primary transition-colors" data-target="abstract">Abstract</a>
+            <a href="index.html#dataset" class="nav-item font-medium hover:text-primary transition-colors" data-target="dataset">Dataset</a>
+            <a href="index.html#benchmark" class="nav-item font-medium hover:text-primary transition-colors" data-target="benchmark">Benchmark</a>
+            <a href="index.html#results" class="nav-item font-medium hover:text-primary transition-colors" data-target="results">Results</a>
+            <a href="index.html#Details" class="nav-item font-medium hover:text-primary transition-colors" data-target="Details">Details</a>
+<!--            <a href="#" class="font-medium text-primary transition-colors">Download</a>-->
+        </div>
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-dark focus:outline-none">
+                <i class="fa fa-bars text-primary text-xl"></i>
+            </button>
+        </div>
     </div>
+    
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg animate-fade-in">
+        <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+            <a href="index.html#abstract" class="nav-item font-medium py-2 hover:text-primary transition-colors" data-target="abstract">Abstract</a>
+            <a href="index.html#dataset" class="nav-item font-medium py-2 hover:text-primary transition-colors" data-target="dataset">Dataset</a>
+            <a href="index.html#benchmark" class="nav-item font-medium py-2 hover:text-primary transition-colors" data-target="benchmark">Benchmark</a>
+            <a href="index.html#results" class="nav-item font-medium py-2 hover:text-primary transition-colors" data-target="results">Results</a>
+            <a href="index.html#Details" class="nav-item font-medium py-2 hover:text-primary transition-colors" data-target="Details">Details</a>
+            <a href="#" class="nav-item font-medium py-2 text-primary transition-colors" data-target="download">Download</a>
+        </div>
+    </div>
+</nav>
 
-    <!-- 以下内容完全保留，无任何修改 -->
-    <div class="container">
-        <h2 class="section-title">Procedure</h2>
-        <div class="procedure">
-            <div class="procedure-step">
-                <div>Apply for License Key</div>
-                <div class="procedure-btn">Read & Sign License</div>
-                <div class="arrow">→</div>
-                <div class="procedure-btn">Send Request Email</div>
-            </div>
-            <div class="arrow">→</div>
-            <div class="procedure-step">
-                <div class="procedure-btn">Receive License Key</div>
-            </div>
-            <div class="arrow">→</div>
-            <div class="procedure-step">
-                <div>Download Data</div>
-                <div class="procedure-btn">Login</div>
-                <div class="arrow">→</div>
-                <div class="procedure-btn">Download</div>
+
+<style>
+    .nav-item.active {
+        color: #165DFF !important;
+        font-weight: 600;
+        position: relative;
+    }
+
+    .md\:flex .nav-item.active::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #165DFF;
+        border-radius: 1px;
+    }
+
+    #mobile-menu .nav-item.active {
+        padding-left: 8px;
+        border-left: 2px solid #165DFF;
+    }
+
+    #mobile-menu .nav-item.active::after {
+        display: none;
+    }
+
+    
+    .custom-checkbox {
+        
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        
+        width: 18px !important;
+        height: 18px !important;
+        
+        border: 2px solid #165DFF;
+        border-radius: 3px;
+        
+        vertical-align: middle;
+        margin-top: 0 !important;
+        position: relative;
+        cursor: pointer;
+        flex-shrink: 0; 
+    }
+
+    
+    .custom-checkbox:checked {
+        background-color: #165DFF;
+        border-color: #165DFF;
+    }
+
+    
+    .custom-checkbox:checked::after {
+        content: '�?;
+        position: absolute;
+        color: white;
+        font-size: 12px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    
+    .custom-checkbox:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.2);
+    }
+
+    .form-error {
+        border-color: #ef4444 !important;
+    }
+
+    .form-success {
+        border-color: #10b981 !important;
+    }
+
+    .error-message {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: none;
+    }
+
+    
+    #verify-container {
+        user-select: none; 
+    }
+    #drag-slider {
+        z-index: 10; 
+        cursor: grab !important;
+    }
+    #drag-slider:active {
+        cursor: grabbing !important;
+    }
+</style>
+
+<script>
+    function highlightNavItem(target) {
+        const allNavItems = document.querySelectorAll('.nav-item');
+        allNavItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('data-target') === target);
+        });
+    }
+
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-2', 'shadow-md');
+            navbar.classList.remove('py-3', 'shadow-sm');
+        } else {
+            navbar.classList.add('py-3', 'shadow-sm');
+            navbar.classList.remove('py-2', 'shadow-md');
+        }
+    });
+
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        highlightNavItem('dataset');
+
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                highlightNavItem(target);
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+
+        const emailInput = document.getElementById('email');
+        const requestBtn = document.getElementById('request-access-btn');
+        const agreeAll = document.getElementById('agree-all');
+        const terms = [
+            document.getElementById('term1'),
+            document.getElementById('term2'),
+            document.getElementById('term3'),
+            document.getElementById('term4')
+        ];
+
+
+        agreeAll.addEventListener('change', function() {
+            terms.forEach(term => {
+                term.checked = this.checked;
+            });
+        });
+
+
+        terms.forEach(term => {
+            term.addEventListener('change', function() {
+                if (!this.checked) {
+                    agreeAll.checked = false;
+                } else {
+
+                    agreeAll.checked = terms.every(t => t.checked);
+                }
+            });
+        });
+
+
+        const dragContainer = document.getElementById('verify-container');
+        const dragHandle = document.getElementById('drag-slider');
+        const dragText = dragContainer.querySelector('.absolute.inset-0.flex');
+        let isDragging = false;
+        let startX;
+        let containerWidth, handleWidth, requiredDistance;
+
+
+        setTimeout(() => {
+            containerWidth = dragContainer.offsetWidth;
+            handleWidth = dragHandle.offsetWidth;
+            requiredDistance = containerWidth - handleWidth - 20;
+        }, 100);
+
+
+        dragHandle.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            isDragging = true;
+            startX = e.clientX;
+            dragHandle.classList.add('scale-105');
+            dragContainer.classList.add('drag-verify-active');
+
+            containerWidth = dragContainer.offsetWidth;
+            handleWidth = dragHandle.offsetWidth;
+            requiredDistance = containerWidth - handleWidth - 20;
+        });
+
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+
+            const diffX = e.clientX - startX;
+            if (diffX > 0 && diffX < requiredDistance) {
+                dragHandle.style.left = `${diffX}px`;
+                dragText.textContent = 'Continue dragging...';
+            } else if (diffX >= requiredDistance) {
+                dragHandle.style.left = `${requiredDistance}px`;
+                dragText.innerHTML = '<i class="fa fa-check mr-2"></i> Verified';
+                dragText.classList.add('text-green-600');
+                dragHandle.classList.remove('bg-primary');
+                dragHandle.classList.add('bg-green-500');
+                dragHandle.innerHTML = '<i class="fa fa-check"></i>';
+                isDragging = false;
+            }
+        });
+
+
+        document.addEventListener('mouseup', function() {
+            if (isDragging) {
+                const currentLeft = parseFloat(dragHandle.style.left || 0);
+                if (currentLeft < requiredDistance) {
+                    dragHandle.style.left = '0';
+                    dragText.textContent = 'Drag to the right to verify';
+                }
+            }
+            dragHandle.classList.remove('scale-105');
+            isDragging = false;
+        });
+
+
+
+        function validateForm() {
+            let isValid = true;
+
+
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                emailInput.classList.add('form-error');
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            } else {
+                emailInput.classList.remove('form-error');
+                emailInput.classList.add('form-success');
+                document.getElementById('email-error').style.display = 'none';
+            }
+
+
+            if (!agreeAll.checked) {
+                document.getElementById('terms-error').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('terms-error').style.display = 'none';
+            }
+
+
+            if (parseInt(dragHandle.style.left || 0) < (requiredDistance || 0)) {
+                dragContainer.classList.add('border-2', 'border-red-500');
+                isValid = false;
+            } else {
+                dragContainer.classList.remove('border-2', 'border-red-500');
+            }
+
+            return isValid;
+        }
+
+
+        emailInput.addEventListener('input', validateForm);
+
+
+        requestBtn.addEventListener('click', function() {
+            if (validateForm()) {
+
+                this.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> Preparing email...';
+                this.disabled = true;
+
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fa fa-check mr-2"></i> Opening email request...';
+                    this.classList.remove('bg-primary');
+                    this.classList.add('bg-green-500');
+                    const subject = encodeURIComponent('Application of VIHand Dataset');
+                    const body = encodeURIComponent(
+                        `Applicant Email: ${emailInput.value.trim()}\n` +
+                        'Applicant: \n' +
+                        'Occupation: \n' +
+                        'Institution: \n' +
+                        'Purpose of Usage: \n\n' +
+                        'I have read and agree to the VIHand Dataset License Agreement.'
+                    );
+                    window.location.href = `mailto:shirley_w0118@sjtu.edu.cn?subject=${subject}&body=${body}`;
+                    return;
+
+                }, 1500);
+            }
+        });
+    });
+</script>
+    
+    <header class="pt-24 pb-8 md:pt-32 md:pb-12 bg-gradient-to-br from-primary/5 to-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-7xl mx-auto text-center">
+                <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold leading-tight text-dark mb-6 animate-fade-in">
+                    VIHand Dataset Download
+                </h1>
+                <p class="text-[clamp(1.1rem,2vw,1.3rem)] text-gray-600 mb-8 animate-slide-up">
+                    Follow the steps below to request access to the VIHand dataset
+                </p>
             </div>
         </div>
+    </header>
 
-        <h2 class="section-title">Apply for License Key</h2>
-        <div class="instructions">
-            <p>1. Download and read <strong><a href="https://facescape.nju.edu.cn/static/License_Agreement.pdf" target="_blank" class="license-link">LICENSE AGREEMENT</a></strong> carefully, confirming that all the terms are agreed. Then scan the signed license agreement to pdf. Electronic signature is allowed, which is turning the handwritten signature into a picture to be placed on the agreement.</p>
-            <p>2. Send an e-mail to facescape@outlook.com. We recommend to apply using a *.edu e-mail, which is more likely to be authorized.</p>
-            <p>We will respond to e-mails every Tuesday and Friday. Please refer to the following template for Email content:</p>
-            
-            <div class="email-template">
-                Subject: Application of FaceScape Dataset<br>
-                Content Template:<br>
-                Applicant: ________<br>
-                Occupation: ________<br>
-                Institution: ________<br>
-                Purpose of Usage: ________<br>
-                Attachment: Scanned of license agreement with signature
-            </div>
+    
+<section class="py-2 scroll-mt-24">
+    <div class="max-w-6xl mx-auto px-2">
+        
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-10 animate-fade-in">
+            <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold mb-6 text-center">Procedure</h2>
 
-            <p>Optional: We recommend to attach a brief resume or personal page URL to help us identify you. If we cannot identify you as a professor or researcher, the application may be ignored.</p>
-        </div>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
+                
+                <div class="flex-1 text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-file-text-o text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Apply for License Key</h3>
+                    <div class="space-y-2">
+                        <a href="License_Agreement.pdf" target="_blank" class="pill-button inline-block mx-auto">
+                            Read & Sign License
+                        </a>
+                        <span class="block my-2">�?/span>
+                        <a href="mailto:shirley_w0118@sjtu.edu.cn" class="pill-button inline-block mx-auto">
+                            Send Request Email
+                        </a>
+                    </div>
+                </div>
 
-        <h2 class="section-title">Download Data</h2>
-        <div class="instructions">
-            <p>When you submit request, which means you have read, understand, and commit to the entirety of the License Agreement. There are, still, a few <strong>KEY POINTS</strong> which need to emphasize again:</p>
-            
-            <div class="restrictions">
-                <p>☐ NO COMMERCIAL USE: The license granted is for internal, non-commercial research, evaluation or testing purposes only. Any use of the DATA or its contents to manufacture or sell products or technologies (or portions thereof) either directly or indirectly for any direct or indirect for-profit purposes is strictly prohibited.</p>
-                <p>☐ NO DISTRIBUTION: You are not allowed to sublicense or distribute the DATA in whole or in part to any third party.</p>
-                <p>☐ NO WARRANTY: The data are provided "as is" and any express or implied warranties are disclaimed.</p>
-                <p>☐ RESTRICTED USE IN RESEARCH: The portraits including images and rendered model cannot be published in any form, except for the data as listed in the published list.</p>
-                <p>☐ I AGREE ALL OF THESE STATEMENTS.</p>
-            </div>
 
-            <div class="form-group">
-                <label><span class="required">*</span> E-Mail</label>
-                <input type="email" placeholder="Please input your E-Mail">
-            </div>
-            <div class="form-group">
-                <label><span class="required">*</span> License Key</label>
-                <input type="text" placeholder="Please input your License Key">
-            </div>
+<!--                <div class="hidden md:block text-2xl text-gray-400">-->
+<!--                    <i class="fa fa-long-arrow-right"></i>-->
+<!--                </div>-->
+<!--                <div class="md:hidden text-2xl text-gray-400">-->
+<!--                    <i class="fa fa-long-arrow-down"></i>-->
+<!--                </div>-->
 
-            <div class="drag-verify">
-                <label>Drag to Verify</label>
-                <div class="drag-slider">
-                    <div class="drag-handle">→</div>
+                
+                <div class="flex-1 text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-key text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Receive License Key</h3>
+                    <div class="pill-button bg-secondary inline-block mx-auto">
+                        License Key
+                    </div>
+                </div>
+
+
+<!--                <div class="hidden md:block text-2xl text-gray-400">-->
+<!--                    <i class="fa fa-long-arrow-right"></i>-->
+<!--                </div>-->
+<!--                <div class="md:hidden text-2xl text-gray-400">-->
+<!--                    <i class="fa fa-long-arrow-down"></i>-->
+<!--                </div>-->
+
+                
+                <div class="flex-1 text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-download text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Download Data</h3>
+                    <div class="space-y-2">
+                        
+                        <a href="#download-data" class="pill-button bg-accent inline-block mx-auto">
+                            Login
+                        </a>
+                        <span class="block my-2">�?/span>
+                        <a href="#download-data" class="pill-button inline-block mx-auto">
+                            Download
+                        </a>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <button class="btn-login">Login</button>
+        
+    <div class="max-w-6xl mx-auto px-4 py-8"> 
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-10 animate-slide-up">
+            <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold mb-6 text-primary">Apply for License Key</h2>
+
+            <div class="text-gray-700 leading-relaxed">
+                <p class="mb-4">1. Download and read <strong><a href="License_Agreement.pdf" target="_blank" class="text-primary underline hover:no-underline">LICENSE AGREEMENT</a></strong> carefully, confirming that all the terms are agreed. Then scan the signed license agreement to pdf. Electronic signature is allowed, which is turning the handwritten signature into a picture to be placed on the agreement.</p>
+
+                <p class="mb-4">2. Send an e-mail to <span class="font-bold">shirley_w0118@sjtu.edu.cn</span>. We recommend to apply using a <span class="font-bold">*.edu e-mail</span>, which is more likely to be authorized.</p>
+
+                <p class="mb-4">We will respond to e-mails every Tuesday and Friday. Please refer to the following template for Email content:</p>
+
+                <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-primary mb-6">
+                    <p class="font-medium mb-2">Subject: Application of VIHand Dataset</p>
+                    <p class="mb-1">Content Template:</p>
+                    <p class="mb-1">Applicant: ________________________</p>
+                    <p class="mb-1">Occupation: ________________________</p>
+                    <p class="mb-1">Institution: ________________________</p>
+                    <p class="mb-1">Purpose of Usage: ________________________</p>
+                    <p>Attachment: Scanned of license agreement with signature</p>
+                </div>
+
+                <p>Optional: We recommend to attach a brief resume or personal page URL to help us identify you. If we cannot identify you as a professor or researcher, the application may be ignored.</p>
+            </div>
         </div>
     </div>
+
+        
+    <div id="download-data" class="max-w-6xl mx-auto px-4 py-4">
+        <div class="bg-white rounded-xl shadow-lg p-6 animate-slide-up" style="animation-delay: 0.2s;">
+            <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold mb-6 text-primary">Download Data</h2>
+
+            <div class="text-gray-700 leading-relaxed mb-6">
+                <p class="mb-4">When you submit request, which means you have read, understand, and commit to the entirety of the License Agreement. There are, still, a few <strong>KEY POINTS</strong> which need to emphasize again:</p>
+
+                <div class="bg-gray-50 p-4 rounded-lg mb-6 space-y-3">
+                    <p class="flex items-start gap-2">
+                        <input type="checkbox" id="term1" class="custom-checkbox">
+                        <label for="term1">
+                            <strong>NO COMMERCIAL USE:</strong> The license granted is for internal, non-commercial research, evaluation or testing purposes only. Any use of the DATA or its contents to manufacture or sell products or technologies (or portions thereof) either directly or indirectly for any direct or indirect for-profit purposes is strictly prohibited.
+                        </label>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <input type="checkbox" id="term2" class="custom-checkbox">
+                        <label for="term2">
+                            <strong>NO DISTRIBUTION:</strong> You are not allowed to sublicense or distribute the DATA in whole or in part to any third party.
+                        </label>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <input type="checkbox" id="term3" class="custom-checkbox">
+                        <label for="term3">
+                            <strong>NO WARRANTY:</strong> The data are provided "as is" and any express or implied warranties are disclaimed.
+                        </label>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <input type="checkbox" id="term4" class="custom-checkbox">
+                        <label for="term4">
+                            <strong>RESTRICTED USE IN RESEARCH:</strong> The portraits including images and rendered model cannot be published in any form, except for the data as listed in the published list.
+                        </label>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <input type="checkbox" id="agree-all" class="custom-checkbox">
+                        <label for="agree-all">
+                            <strong>I AGREE ALL OF THESE STATEMENTS.</strong>
+                        </label>
+                    </p>
+                </div>
+                <p id="terms-error" class="error-message"><i class="fa fa-exclamation-circle mr-1"></i> Please agree to all terms and conditions</p>
+            </div>
+
+
+            
+            <div class="max-w-md mx-auto">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 mb-2">
+                        <span class="text-red-500">*</span> E-Mail
+                    </label>
+                    <input type="email" id="email" placeholder="Please input your E-Mail"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none form-input-focus">
+                    <p id="email-error" class="error-message"><i class="fa fa-exclamation-circle mr-1"></i> Please enter a valid email address</p>
+                </div>
+
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Drag to Verify</label>
+                    <div class="w-full h-12 bg-gray-100 rounded-lg relative" id="verify-container">
+                        <div id="drag-slider" class="absolute left-0 top-0 h-full w-16 bg-primary text-white flex items-center justify-center cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                            <i class="fa fa-angle-right"></i>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm">
+                            Drag to the right to verify
+                        </div>
+                    </div>
+                </div>
+
+                <button id="request-access-btn" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-300 hover:shadow-lg">
+                    Send Request Email
+                </button>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+    <script>
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-3', 'shadow-sm');
+            } else {
+                navbar.classList.add('py-3', 'shadow-sm');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
