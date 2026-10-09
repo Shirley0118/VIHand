@@ -510,26 +510,26 @@ thumb,          index, middle finger, ring finger and little finger.
             <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
                 <pre class="text-lg font-mono leading-relaxed">
             ${ROOT}
-            ├── multidata
-            �?  ├── subject1 ~ subject15           # 15 subjects
-            �?  �?  ├── ROM01 ~ ROM15              # 15 gesture sequences
-            �?  �?  �?  ├── camera0 ~ camera4      # 5 camera views
-            �?  �?  �?  �?  ├── rgb                # RGB sequences
-            �?  �?  �?  �?  ├── depth              # Depth map sequences
-            �?  �?  �?  �?  ├── bbox.json          # bounding box
-            �?  �?  �?  �?  └── center.json        # Depth map center
-            �?  �?  �?  │── IMU.json               # IMU sequences
-            �?  �?  �?  └── camera_paras.json      # camera parameters
-            �?  �?  �?..
-            �?  �?..
-            ├── annotations
-            �?  ├── subject1 ~ subject15
-            �?  �?  ├── ROM01 ~ ROM15
-            �?  �?  �?  ├── joint.json
-            �?  �?  �?  ├── mano.json
-            �?  �?  �?  └── mesh.json
-            �?  �?  �?..
-            �?  �?..
+            |-- multidata
+            |   |-- subject1 ~ subject15           # 15 subjects
+            |   |   |-- ROM01 ~ ROM15              # 15 gesture sequences
+            |   |   |   |-- camera0 ~ camera4      # 5 camera views
+            |   |   |   |   |-- rgb                # RGB sequences
+            |   |   |   |   |-- depth              # Depth map sequences
+            |   |   |   |   |-- bbox.json          # bounding box
+            |   |   |   |   `-- center.json        # Depth map center
+            |   |   |   |-- IMU.json               # IMU sequences
+            |   |   |   `-- camera_paras.json      # camera parameters
+            |   |   ...
+            |   ...
+            |-- annotations
+            |   |-- subject1 ~ subject15
+            |   |   |-- ROM01 ~ ROM15
+            |   |   |   |-- joint.json
+            |   |   |   |-- mano.json
+            |   |   |   `-- mesh.json
+            |   |   ...
+            |   ...
                 </pre>
             </div>
             <div class="note mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
